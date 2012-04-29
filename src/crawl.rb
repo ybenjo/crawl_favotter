@@ -22,9 +22,12 @@ class FavotterCrawler
 
     FileUtils.mkdir("#{current}/../logs") if !File.exist?("#{current}/../logs")
     @log = Logger.new("#{current}/../logs/#{Time.now.strftime('%Y_%m_%d_%H_%M')}.log")
+    @log.info("Start #{@from.to_s} => #{@to.to_s}")
   end
 
   def get(day)
+    @log.info("Now #{day.to_s}")
+
     1.upto(1/0.0) do |i|
       break if @limit_flag
       begin
