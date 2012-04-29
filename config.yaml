@@ -1,0 +1,4 @@
+url: http://favotter.net
+db: twitter
+collections: favotter
+sleep: 30
