@@ -18,7 +18,6 @@ class FavotterCrawler
     @from = Date.parse(from)
     @to = Date.parse(to)
     @fav_limit = conf['fav_limit']
-    @limit_flag = false
 
     FileUtils.mkdir("#{current}/../logs") if !File.exist?("#{current}/../logs")
     @log = Logger.new("#{current}/../logs/#{Time.now.strftime('%Y_%m_%d_%H_%M')}.log")
@@ -26,6 +25,7 @@ class FavotterCrawler
   end
 
   def get(day)
+    @limit_flag = false
     @log.info("Now #{day.to_s}")
 
     1.upto(1/0.0) do |i|
@@ -41,6 +41,7 @@ class FavotterCrawler
           user_name = (elem/'div.thumb'/'img').attribute('alt').value
           count = (elem/'span.favotters'/'a').size
           updated = Time.parse((elem/'div.info'/'a.taggedlink').first.inner_text)
+          tweet_id = elem.attribute('id').value.gsub(/status_/, "").to_s
 
           if count < @fav_limit
             @limit_flag = true
@@ -52,7 +53,8 @@ class FavotterCrawler
                        :tweet => tweet,
                        :user_name => user_name,
                        :count => count,
-                       :updated => updated
+                       :updated => updated,
+                       :tweet_id => tweet_id
                      })
         end
       rescue => e
@@ -71,5 +73,6 @@ end
 
 if __FILE__ == $0
   c = FavotterCrawler.new(ARGV[0], ARGV[1])
-  c.crawl
+  c.get('2012-04-01')
+  # c.crawl
 end
