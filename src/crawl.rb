@@ -70,6 +70,6 @@ end
 
 
 if __FILE__ == $0
-  c = FavotterCrawler.new
-  c.crawl(ARGV[0], ARGV[1])
+  c = FavotterCrawler.new(ARGV[0], ARGV[1])
+  c.crawl
 end
