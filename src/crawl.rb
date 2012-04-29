@@ -32,10 +32,10 @@ class FavotterCrawler
       break if @limit_flag
       begin
         sleep @sleep
-        @log.info("Get #{url}")
         url = "#{@url}/home.php?mode=best&date=#{day.to_s}&page=#{i}"
-        doc = Nokogiri::HTML(open(url).read)
+        @log.info("Get #{url}")
 
+        doc = Nokogiri::HTML(open(url).read)
         (doc/'div.clear'/'div.entry.xfolkentry.hentry').each do |elem|
           tweet = (elem/'span.status_text.description').inner_text.gsub(/\n/, "")
           user_name = (elem/'div.thumb'/'img').attribute('alt').value
