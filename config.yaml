@@ -1,4 +1,9 @@
 url: http://favotter.net
+# mongodb周り
 db: twitter
 collections: favotter
-sleep: 30
+port: 27017
+# クロール間隔
+sleep: 60
+# クロールする際の下限 fav 数
+fav_limit: 50
