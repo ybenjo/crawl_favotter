@@ -73,6 +73,5 @@ end
 
 if __FILE__ == $0
   c = FavotterCrawler.new(ARGV[0], ARGV[1])
-  c.get('2012-04-01')
-  # c.crawl
+  c.crawl
 end
